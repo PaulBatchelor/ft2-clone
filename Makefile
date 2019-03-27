@@ -11,7 +11,6 @@ CFLAGS += -F/Library/Frameworks -D__MACOSX_CORE__
 LIBS += /usr/lib/libiconv.dylib
 LIBS += -lm -Winit-self
 
-CFLAGS += -Wno-deprecated -Wextra -Wunused
 CFLAGS += -mno-ms-bitfields
 CFLAGS += -Wno-missing-field-initializers
 CFLAGS += -Wswitch-default
@@ -25,7 +24,8 @@ ifeq ($(OS), Linux)
 LIBS += -lfts
 endif
 
-CFLAGS += -O3
+#CFLAGS += -Wno-deprecated -Wextra -Wunused
+CFLAGS += -O3 -g
 LIBS += -lpthread -lm -lstdc++
 LIBS += -lSDL2
 

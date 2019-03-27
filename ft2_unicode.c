@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdio.h>
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -308,7 +309,10 @@ char *utf8ToCp437(char *src, bool removeIllegalChars)
 #ifdef __APPLE__
 	cd = iconv_open("437//TRANSLIT//IGNORE", "UTF-8-MAC");
 #else
-	cd = iconv_open("437//TRANSLIT//IGNORE", "UTF-8");
+	//cd = iconv_open("437//TRANSLIT//IGNORE", "UTF-8");
+    // Paul: things seem to crash here on Alpine Linux, trying to fix
+    // This is NOT a fix
+	cd = iconv_open("UTF-8", "UTF-8");
 #endif
 	if (cd == (iconv_t)(-1))
 		return (NULL);
