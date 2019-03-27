@@ -1692,7 +1692,6 @@ static void displayCurrPath(void)
 		return;
 
 	asciiPath = unicharToCp437(FReq_CurPathU, true);
-    fprintf(stderr, "current path: %s\n", FReq_CurPathU);
 	if (asciiPath == NULL)
 	{
 		okBox(0, "System message", "Not enough memory! Displaycurpath");
@@ -1904,7 +1903,6 @@ static int32_t SDLCALL diskOp_ReadDirectoryThread(void *ptr)
 	}
 
 	UNICHAR_GETCWD(FReq_CurPathU, PATH_MAX);
-    fprintf(stderr, "cwd: %s, PATH_MAX: %d\n", FReq_CurPathU, PATH_MAX);
 	editor.diskOpReadDone = true;
 
 	setMouseBusy(false);
