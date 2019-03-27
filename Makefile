@@ -1,25 +1,31 @@
 
-CFLAGS += -mmacosx-version-min=10.7 
-CFLAGS += -arch x86_64 
-CFLAGS += -mmmx -mfpmath=sse -msse2 
-CFLAGS += -I/Library/Frameworks/SDL2.framework/Headers 
+OS = $(shell uname -s)
+
+ifeq ($(OS), Darwin)
+CFLAGS += -mmacosx-version-min=10.7
+CFLAGS += -arch x86_64
+CFLAGS += -mmmx -mfpmath=sse -msse2
+CFLAGS += -I/Library/Frameworks/SDL2.framework/Headers
 CFLAGS += -F/Library/Frameworks -D__MACOSX_CORE__
-CFLAGS += -stdlib=libc++ 
-CFLAGS += -O3
 
-#src/rtmidi/*.cpp
-
-# src/gfxdata/*.c src/*.c
-LIBS += /usr/lib/libiconv.dylib 
-LIBS += -lm -Winit-self 
+LIBS += /usr/lib/libiconv.dylib
+LIBS += -lm -Winit-self
 
 CFLAGS += -Wno-deprecated -Wextra -Wunused
 CFLAGS += -mno-ms-bitfields
-CFLAGS += -Wno-missing-field-initializers 
+CFLAGS += -Wno-missing-field-initializers
 CFLAGS += -Wswitch-default
-
-FRAMEWORKS += -framework CoreMidi -framework CoreAudio 
+CFLAGS += -stdlib=libc++
+FRAMEWORKS += -framework CoreMidi -framework CoreAudio
 FRAMEWORKS += -framework Cocoa
+endif
+
+ifeq ($(OS), Linux)
+# Alpine linux has FTS as an external lib
+LIBS += -lfts
+endif
+
+CFLAGS += -O3
 LIBS += -lpthread -lm -lstdc++
 LIBS += -lSDL2
 
@@ -84,7 +90,7 @@ ft2: $(OBJ)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 %.o: %.cpp
-	@echo "CC $<"
+	@echo "CXX $<"
 	@$(CXX) -c $(CFLAGS) $< -o $@
 
 clean:
