@@ -5,19 +5,19 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_header.h"
-#include "ft2_gui.h"
-#include "ft2_config.h"
-#include "ft2_audio.h"
-#include "ft2_help.h"
-#include "ft2_sample_ed.h"
-#include "ft2_inst_ed.h"
-#include "ft2_diskop.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_audioselector.h"
-#include "ft2_midi.h"
-#include "ft2_mouse.h"
-#include "ft2_video.h"
+#include "header.h"
+#include "gui.h"
+#include "config.h"
+#include "audio.h"
+#include "help.h"
+#include "sample_ed.h"
+#include "inst_ed.h"
+#include "diskop.h"
+#include "pattern_ed.h"
+#include "audioselector.h"
+#include "midi.h"
+#include "mouse.h"
+#include "video.h"
 
 scrollBar_t scrollBars[NUM_SCROLLBARS] =
 {

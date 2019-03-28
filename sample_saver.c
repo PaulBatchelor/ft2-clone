@@ -9,11 +9,11 @@
 #ifndef _WIN32
 #include <unistd.h> // chdir()
 #endif
-#include "ft2_header.h"
-#include "ft2_gui.h"
-#include "ft2_sample_ed.h"
-#include "ft2_diskop.h"
-#include "ft2_mouse.h"
+#include "header.h"
+#include "gui.h"
+#include "sample_ed.h"
+#include "diskop.h"
+#include "mouse.h"
 
 typedef struct wavHeader_t
 {

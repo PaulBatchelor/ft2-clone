@@ -1,7 +1,7 @@
 #ifndef __FT2_MIX_MACROS_H
 #define __FT2_MIX_MACROS_H
 
-#include "ft2_header.h"
+#include "header.h"
 
 /* ----------------------------------------------------------------------- */
 /*                          GENERAL MIXER MACROS                           */

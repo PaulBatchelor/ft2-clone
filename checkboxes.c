@@ -3,16 +3,16 @@
 #include <crtdbg.h>
 #endif
 
-#include "ft2_header.h"
-#include "ft2_gui.h"
-#include "ft2_config.h"
-#include "ft2_sample_ed.h"
-#include "ft2_nibbles.h"
-#include "ft2_inst_ed.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_trim.h"
-#include "ft2_mouse.h"
-#include "ft2_edit.h"
+#include "header.h"
+#include "gui.h"
+#include "config.h"
+#include "sample_ed.h"
+#include "nibbles.h"
+#include "inst_ed.h"
+#include "pattern_ed.h"
+#include "trim.h"
+#include "mouse.h"
+#include "edit.h"
 
 checkBox_t checkBoxes[NUM_CHECKBOXES] =
 {

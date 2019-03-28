@@ -1,9 +1,9 @@
 #include <stdio.h> // sprintf()
-#include "ft2_header.h"
-#include "ft2_gui.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_gfxdata.h"
-#include "ft2_video.h"
+#include "header.h"
+#include "gui.h"
+#include "pattern_ed.h"
+#include "gfxdata.h"
+#include "video.h"
 
 // ported from original FT2 code
 

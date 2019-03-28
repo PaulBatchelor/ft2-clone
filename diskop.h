@@ -2,7 +2,7 @@
 #define __FT2_DISKOP_H
 
 #include <stdint.h>
-#include "ft2_unicode.h"
+#include "unicode.h"
 
 #define DISKOP_ENTRY_NUM 15
 

@@ -2,10 +2,10 @@
 #define __FT2_INST_ED_H
 
 #include <stdint.h>
-#include "ft2_header.h"
-#include "ft2_audio.h"
-#include "ft2_audio.h"
-#include "ft2_unicode.h"
+#include "header.h"
+#include "audio.h"
+#include "audio.h"
+#include "unicode.h"
 
 void saveInstr(UNICHAR *filenameU, int16_t nr);
 void loadInstr(UNICHAR *filenameU);

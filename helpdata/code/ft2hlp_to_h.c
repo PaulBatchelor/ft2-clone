@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
         return (1);
     }
 
-    fOut = fopen("ft2_help_data.h", "w");
+    fOut = fopen("help_data.h", "w");
     if (fOut == NULL)
     {
         printf("Error: Could not open ft2_help_data.h for writing!\n");

@@ -5,12 +5,12 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include "ft2_header.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_gfxdata.h"
-#include "ft2_config.h"
-#include "ft2_gui.h"
-#include "ft2_video.h"
+#include "header.h"
+#include "pattern_ed.h"
+#include "gfxdata.h"
+#include "config.h"
+#include "gui.h"
+#include "video.h"
 
 static const uint8_t vol2charTab1[16] = { 39, 0, 1, 2, 3, 4, 36, 52, 53, 54, 28, 31, 25, 58, 59, 22 };
 static const uint8_t vol2charTab2[16] = { 42, 0, 1, 2, 3, 4, 36, 37, 38, 39, 28, 31, 25, 40, 41, 22 };

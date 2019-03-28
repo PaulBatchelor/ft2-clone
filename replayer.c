@@ -6,19 +6,19 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h>
-#include "ft2_audio.h"
-#include "ft2_header.h"
-#include "ft2_config.h"
-#include "ft2_gui.h"
-#include "ft2_video.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_sample_ed.h"
-#include "ft2_inst_ed.h"
-#include "ft2_diskop.h"
-#include "ft2_midi.h"
-#include "ft2_scopes.h"
-#include "ft2_mouse.h"
-#include "ft2_sample_loader.h"
+#include "audio.h"
+#include "header.h"
+#include "config.h"
+#include "gui.h"
+#include "video.h"
+#include "pattern_ed.h"
+#include "sample_ed.h"
+#include "inst_ed.h"
+#include "diskop.h"
+#include "midi.h"
+#include "scopes.h"
+#include "mouse.h"
+#include "sample_loader.h"
 
 /*
 ** This is a *huge* mess, directly ported from the original FT2 code (and modified).

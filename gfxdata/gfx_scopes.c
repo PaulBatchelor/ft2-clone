@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "../ft2_palette.h"
+#include "../palette.h"
 
 const uint8_t scopeRecBMP[52] =
 {

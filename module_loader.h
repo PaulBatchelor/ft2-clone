@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_unicode.h"
+#include "unicode.h"
 
 void loadMusic(UNICHAR *filenameU);
 //bool loadMusicUnthreaded(UNICHAR *filenameU); // for development testing

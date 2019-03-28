@@ -5,14 +5,14 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include "ft2_header.h"
-#include "ft2_config.h"
-#include "ft2_keyboard.h"
-#include "ft2_audio.h"
-#include "ft2_midi.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_sysreqs.h"
-#include "ft2_textboxes.h"
+#include "header.h"
+#include "config.h"
+#include "keyboard.h"
+#include "audio.h"
+#include "midi.h"
+#include "pattern_ed.h"
+#include "sysreqs.h"
+#include "textboxes.h"
 
 enum
 {

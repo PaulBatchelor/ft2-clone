@@ -6,20 +6,20 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_header.h"
-#include "ft2_gfxdata.h"
-#include "ft2_config.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_gui.h"
-#include "ft2_sample_ed.h"
-#include "ft2_pattern_draw.h"
-#include "ft2_inst_ed.h"
-#include "ft2_scopes.h"
-#include "ft2_diskop.h"
-#include "ft2_audio.h"
-#include "ft2_wav_renderer.h"
-#include "ft2_mouse.h"
-#include "ft2_video.h"
+#include "header.h"
+#include "gfxdata.h"
+#include "config.h"
+#include "pattern_ed.h"
+#include "gui.h"
+#include "sample_ed.h"
+#include "pattern_draw.h"
+#include "inst_ed.h"
+#include "scopes.h"
+#include "diskop.h"
+#include "audio.h"
+#include "wav_renderer.h"
+#include "mouse.h"
+#include "video.h"
 
 // for pattern marking w/ keyboard
 static int8_t lastChMark;

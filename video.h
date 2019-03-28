@@ -3,9 +3,9 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_header.h"
-#include "ft2_palette.h"
-#include "ft2_audio.h"
+#include "header.h"
+#include "palette.h"
+#include "audio.h"
 
 #define RGB_R(x) (((x) >> 16) & 0xFF)
 #define RGB_G(x) (((x) >>  8) & 0xFF)

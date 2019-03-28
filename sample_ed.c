@@ -10,19 +10,19 @@
 #ifndef _WIN32
 #include <unistd.h> // chdir() in UNICHAR_CHDIR()
 #endif
-#include "ft2_header.h"
-#include "ft2_config.h"
-#include "ft2_audio.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_gui.h"
-#include "ft2_scopes.h"
-#include "ft2_video.h"
-#include "ft2_inst_ed.h"
-#include "ft2_sample_ed.h"
-#include "ft2_sample_saver.h"
-#include "ft2_mouse.h"
-#include "ft2_diskop.h"
-#include "ft2_keyboard.h"
+#include "header.h"
+#include "config.h"
+#include "audio.h"
+#include "pattern_ed.h"
+#include "gui.h"
+#include "scopes.h"
+#include "video.h"
+#include "inst_ed.h"
+#include "sample_ed.h"
+#include "sample_saver.h"
+#include "mouse.h"
+#include "diskop.h"
+#include "keyboard.h"
 
 static const char sharpNote1Char[12] = { 'C', 'C', 'D', 'D', 'E', 'F', 'F', 'G', 'G', 'A', 'A', 'B' };
 static const char sharpNote2Char[12] = { '-', '#', '-', '#', '-', '-', '#', '-', '#', '-', '#', '-' };

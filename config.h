@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_replayer.h"
+#include "replayer.h"
 
 #define CFG_ID_STR "FastTracker 2.0 configuration file\x1A"
 #define CFG_VER 0x0101

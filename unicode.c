@@ -14,7 +14,7 @@
 #else
 #include <iconv.h>
 #endif
-#include "ft2_unicode.h"
+#include "unicode.h"
 
 #ifdef _WIN32
 

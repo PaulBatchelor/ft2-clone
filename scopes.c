@@ -8,16 +8,16 @@
 #ifndef _WIN32
 #include <unistd.h> // usleep()
 #endif
-#include "ft2_header.h"
-#include "ft2_events.h"
-#include "ft2_config.h"
-#include "ft2_audio.h"
-#include "ft2_gui.h"
-#include "ft2_midi.h"
-#include "ft2_gfxdata.h"
-#include "ft2_scopes.h"
-#include "ft2_mouse.h"
-#include "ft2_video.h"
+#include "header.h"
+#include "events.h"
+#include "config.h"
+#include "audio.h"
+#include "gui.h"
+#include "midi.h"
+#include "gfxdata.h"
+#include "scopes.h"
+#include "mouse.h"
+#include "video.h"
 
 enum
 {

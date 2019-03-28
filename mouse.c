@@ -5,20 +5,20 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "ft2_header.h"
-#include "ft2_gui.h"
-#include "ft2_video.h"
-#include "ft2_scopes.h"
-#include "ft2_help.h"
-#include "ft2_sample_ed.h"
-#include "ft2_inst_ed.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_mouse.h"
-#include "ft2_config.h"
-#include "ft2_diskop.h"
-#include "ft2_gfxdata.h"
-#include "ft2_audioselector.h"
-#include "ft2_midi.h"
+#include "header.h"
+#include "gui.h"
+#include "video.h"
+#include "scopes.h"
+#include "help.h"
+#include "sample_ed.h"
+#include "inst_ed.h"
+#include "pattern_ed.h"
+#include "mouse.h"
+#include "config.h"
+#include "diskop.h"
+#include "gfxdata.h"
+#include "audioselector.h"
+#include "midi.h"
 
 static bool mouseBusyGfxBackwards;
 static int16_t mouseShape;

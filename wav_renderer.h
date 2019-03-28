@@ -1,7 +1,7 @@
 #ifndef __FT2_WAV_RENDERER_H
 #define __FT2_WAV_RENDERER_H
 
-#include "ft2_header.h"
+#include "header.h"
 
 #define MIN_WAV_AUDIO_FREQ 8000
 #define MAX_WAV_AUDIO_FREQ 192000

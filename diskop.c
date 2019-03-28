@@ -18,21 +18,21 @@
 #endif
 #include <wchar.h>
 #include <sys/stat.h>
-#include "ft2_header.h"
-#include "ft2_unicode.h"
-#include "ft2_config.h"
-#include "ft2_mouse.h"
-#include "ft2_gui.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_sample_loader.h"
-#include "ft2_sample_saver.h"
-#include "ft2_diskop.h"
-#include "ft2_wav_renderer.h"
-#include "ft2_module_loader.h"
-#include "ft2_module_saver.h"
-#include "ft2_events.h"
-#include "ft2_video.h"
-#include "ft2_inst_ed.h"
+#include "header.h"
+#include "unicode.h"
+#include "config.h"
+#include "mouse.h"
+#include "gui.h"
+#include "pattern_ed.h"
+#include "sample_loader.h"
+#include "sample_saver.h"
+#include "diskop.h"
+#include "wav_renderer.h"
+#include "module_loader.h"
+#include "module_saver.h"
+#include "events.h"
+#include "video.h"
+#include "inst_ed.h"
 
 // hide POSIX warnings
 #ifdef _MSC_VER

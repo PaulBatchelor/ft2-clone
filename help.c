@@ -5,13 +5,13 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include "ft2_header.h"
-#include "ft2_gui.h"
-#include "ft2_help.h"
-#include "ft2_video.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_gfxdata.h"
-#include "helpdata/ft2_help_data.h"
+#include "header.h"
+#include "gui.h"
+#include "help.h"
+#include "video.h"
+#include "pattern_ed.h"
+#include "gfxdata.h"
+#include "helpdata/help_data.h"
 
 typedef struct
 {

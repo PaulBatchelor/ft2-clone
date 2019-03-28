@@ -5,14 +5,14 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_header.h"
-#include "ft2_gui.h"
-#include "ft2_video.h"
-#include "ft2_config.h"
-#include "ft2_diskop.h"
-#include "ft2_keyboard.h"
-#include "ft2_gfxdata.h"
-#include "ft2_mouse.h"
+#include "header.h"
+#include "gui.h"
+#include "video.h"
+#include "config.h"
+#include "diskop.h"
+#include "keyboard.h"
+#include "gfxdata.h"
+#include "mouse.h"
 
 textBox_t textBoxes[NUM_TEXTBOXES] =
 {

@@ -12,7 +12,7 @@
 #else
 #include <limits.h> // PATH_MAX
 #endif
-#include "ft2_replayer.h"
+#include "replayer.h"
 
 #define BETA_VERSION 142
 

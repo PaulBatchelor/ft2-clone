@@ -5,16 +5,16 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include "ft2_header.h"
-#include "ft2_config.h"
-#include "ft2_scopes.h"
-#include "ft2_video.h"
-#include "ft2_gui.h"
-#include "ft2_midi.h"
-#include "ft2_wav_renderer.h"
-#include "ft2_module_loader.h"
-#include "ft2_mix.h"
-#include "ft2_audio.h"
+#include "header.h"
+#include "config.h"
+#include "scopes.h"
+#include "video.h"
+#include "gui.h"
+#include "midi.h"
+#include "wav_renderer.h"
+#include "module_loader.h"
+#include "mix.h"
+#include "audio.h"
 
 #define INITIAL_DITHER_SEED 0x12345000
 

@@ -5,22 +5,22 @@
 
 #include <stdint.h>
 #include <time.h>
-#include "ft2_header.h"
-#include "ft2_gfxdata.h"
-#include "ft2_config.h"
-#include "ft2_about.h"
-#include "ft2_mouse.h"
-#include "ft2_nibbles.h"
-#include "ft2_gui.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_scopes.h"
-#include "ft2_help.h"
-#include "ft2_sample_ed.h"
-#include "ft2_inst_ed.h"
-#include "ft2_diskop.h"
-#include "ft2_wav_renderer.h"
-#include "ft2_trim.h"
-#include "ft2_video.h"
+#include "header.h"
+#include "gfxdata.h"
+#include "config.h"
+#include "about.h"
+#include "mouse.h"
+#include "nibbles.h"
+#include "gui.h"
+#include "pattern_ed.h"
+#include "scopes.h"
+#include "help.h"
+#include "sample_ed.h"
+#include "inst_ed.h"
+#include "diskop.h"
+#include "wav_renderer.h"
+#include "trim.h"
+#include "video.h"
 
 void unstuckAllGUIElements(void) // releases all GUI elements if they were held down/used
 {

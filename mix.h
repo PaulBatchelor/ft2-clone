@@ -2,7 +2,7 @@
 #define __FT2_MIX_H
 
 #include <stdint.h>
-#include "ft2_audio.h"
+#include "audio.h"
 
 typedef void (*mixRoutine)(void *, int32_t);
 

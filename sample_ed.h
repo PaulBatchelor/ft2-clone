@@ -2,7 +2,7 @@
 #define __FT2_SAMPLE_ED_H
 
 #include <stdint.h>
-#include "ft2_replayer.h"
+#include "replayer.h"
 
 #define SAMPLE_AREA_HEIGHT   154
 #define SAMPLE_AREA_WIDTH    632

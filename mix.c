@@ -1,8 +1,8 @@
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_header.h"
-#include "ft2_mix.h"
-#include "ft2_mix_macros.h"
+#include "header.h"
+#include "mix.h"
+#include "mix_macros.h"
 
 /*
    --------------------- fixed-point audio channel mixer ---------------------

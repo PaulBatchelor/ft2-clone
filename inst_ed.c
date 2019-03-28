@@ -5,17 +5,17 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include "ft2_header.h"
-#include "ft2_config.h"
-#include "ft2_audio.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_gui.h"
-#include "ft2_scopes.h"
-#include "ft2_sample_ed.h"
-#include "ft2_gfxdata.h"
-#include "ft2_mouse.h"
-#include "ft2_video.h"
-#include "ft2_sample_loader.h"
+#include "header.h"
+#include "config.h"
+#include "audio.h"
+#include "pattern_ed.h"
+#include "gui.h"
+#include "scopes.h"
+#include "sample_ed.h"
+#include "gfxdata.h"
+#include "mouse.h"
+#include "video.h"
+#include "sample_loader.h"
 
 #ifdef _MSC_VER
 #pragma pack(push)

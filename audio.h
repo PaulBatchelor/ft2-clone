@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
-#include "ft2_replayer.h"
+#include "replayer.h"
 
 enum
 {

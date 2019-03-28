@@ -5,16 +5,16 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_header.h"
-#include "ft2_gui.h"
-#include "ft2_config.h"
-#include "ft2_help.h"
-#include "ft2_sample_ed.h"
-#include "ft2_nibbles.h"
-#include "ft2_inst_ed.h"
-#include "ft2_diskop.h"
-#include "ft2_mouse.h"
-#include "ft2_wav_renderer.h"
+#include "header.h"
+#include "gui.h"
+#include "config.h"
+#include "help.h"
+#include "sample_ed.h"
+#include "nibbles.h"
+#include "inst_ed.h"
+#include "diskop.h"
+#include "mouse.h"
+#include "wav_renderer.h"
 
 radioButton_t radioButtons[NUM_RADIOBUTTONS] =
 {

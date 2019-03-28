@@ -7,14 +7,14 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <math.h>
-#include "ft2_header.h"
-#include "ft2_sample_ed.h"
-#include "ft2_gui.h"
-#include "ft2_scopes.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_replayer.h"
-#include "ft2_audio.h"
-#include "ft2_mouse.h"
+#include "header.h"
+#include "sample_ed.h"
+#include "gui.h"
+#include "scopes.h"
+#include "pattern_ed.h"
+#include "replayer.h"
+#include "audio.h"
+#include "mouse.h"
 
 // Messy But Works™
 

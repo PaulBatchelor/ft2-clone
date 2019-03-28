@@ -7,13 +7,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <math.h>
-#include "ft2_header.h"
-#include "ft2_gui.h"
-#include "ft2_unicode.h"
-#include "ft2_audio.h"
-#include "ft2_sample_ed.h"
-#include "ft2_mouse.h"
-#include "ft2_diskop.h"
+#include "header.h"
+#include "gui.h"
+#include "unicode.h"
+#include "audio.h"
+#include "sample_ed.h"
+#include "mouse.h"
+#include "diskop.h"
 
 enum
 {

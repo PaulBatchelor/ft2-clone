@@ -15,14 +15,14 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <math.h>
-#include "ft2_header.h"
-#include "ft2_mouse.h"
-#include "ft2_audio.h"
-#include "ft2_gui.h"
-#include "ft2_events.h"
-#include "ft2_video.h"
-#include "ft2_inst_ed.h"
-#include "ft2_sample_ed.h"
+#include "header.h"
+#include "mouse.h"
+#include "audio.h"
+#include "gui.h"
+#include "events.h"
+#include "video.h"
+#include "inst_ed.h"
+#include "sample_ed.h"
 
 static int8_t smpEd_RelReSmp, mix_Balance = 50;
 static bool stopThread, echo_AddMemory, exitFlag, outOfMemory;

@@ -3,12 +3,12 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h> // round()
-#include "ft2_keyboard.h"
-#include "ft2_config.h"
-#include "ft2_video.h"
-#include "ft2_gui.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_gfxdata.h"
+#include "keyboard.h"
+#include "config.h"
+#include "video.h"
+#include "gui.h"
+#include "pattern_ed.h"
+#include "gfxdata.h"
 
 #define NI_MAXLEVEL 30
 

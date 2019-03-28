@@ -3,13 +3,13 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_pushbuttons.h"
-#include "ft2_radiobuttons.h"
-#include "ft2_checkboxes.h"
-#include "ft2_scrollbars.h"
-#include "ft2_sysreqs.h"
-#include "ft2_textboxes.h"
-#include "ft2_palette.h"
+#include "pushbuttons.h"
+#include "radiobuttons.h"
+#include "checkboxes.h"
+#include "scrollbars.h"
+#include "sysreqs.h"
+#include "textboxes.h"
+#include "palette.h"
 
 #define FONT_CHARS 154
 

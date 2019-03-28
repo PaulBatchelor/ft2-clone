@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_header.h"
+#include "header.h"
 
 int32_t getSampleReadPos(uint8_t ch);
 void stopAllScopes(void);

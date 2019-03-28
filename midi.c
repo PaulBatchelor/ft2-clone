@@ -5,14 +5,14 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "ft2_header.h"
-#include "ft2_edit.h"
-#include "ft2_config.h"
-#include "ft2_gui.h"
-#include "ft2_midi.h"
-#include "ft2_audio.h"
-#include "ft2_mouse.h"
-#include "ft2_pattern_ed.h"
+#include "header.h"
+#include "edit.h"
+#include "config.h"
+#include "gui.h"
+#include "midi.h"
+#include "audio.h"
+#include "mouse.h"
+#include "pattern_ed.h"
 #include "rtmidi/rtmidi_c.h"
 
 // hide POSIX warnings

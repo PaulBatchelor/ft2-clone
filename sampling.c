@@ -5,10 +5,10 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_gui.h"
-#include "ft2_mouse.h"
-#include "ft2_sample_ed.h"
-#include "ft2_video.h"
+#include "gui.h"
+#include "mouse.h"
+#include "sample_ed.h"
+#include "video.h"
 
 // these may very well change after opening the audio input device
 #define SAMPLING_BUFFER_SIZE 1024

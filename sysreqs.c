@@ -1,11 +1,11 @@
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_config.h"
-#include "ft2_gui.h"
-#include "ft2_mouse.h"
-#include "ft2_keyboard.h"
-#include "ft2_textboxes.h"
-#include "ft2_video.h"
+#include "config.h"
+#include "gui.h"
+#include "mouse.h"
+#include "keyboard.h"
+#include "textboxes.h"
+#include "video.h"
 
 #define SYSTEM_REQUEST_H 67
 #define SYSTEM_REQUEST_Y 249

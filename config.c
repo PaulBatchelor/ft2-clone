@@ -16,17 +16,17 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #endif
-#include "ft2_header.h"
-#include "ft2_video.h"
-#include "ft2_audio.h"
-#include "ft2_config.h"
-#include "ft2_gui.h"
-#include "ft2_pattern_ed.h"
-#include "ft2_mouse.h"
-#include "ft2_wav_renderer.h"
-#include "ft2_audioselector.h"
-#include "ft2_midi.h"
-#include "ft2_gfxdata.h"
+#include "header.h"
+#include "video.h"
+#include "audio.h"
+#include "config.h"
+#include "gui.h"
+#include "pattern_ed.h"
+#include "mouse.h"
+#include "wav_renderer.h"
+#include "audioselector.h"
+#include "midi.h"
+#include "gfxdata.h"
 
 // hide POSIX warnings
 #ifdef _MSC_VER

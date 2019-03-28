@@ -5,12 +5,12 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "ft2_header.h"
-#include "ft2_audio.h"
-#include "ft2_gui.h"
-#include "ft2_mouse.h"
-#include "ft2_sample_ed.h"
-#include "ft2_module_loader.h"
+#include "header.h"
+#include "audio.h"
+#include "gui.h"
+#include "mouse.h"
+#include "sample_ed.h"
+#include "module_loader.h"
 
 /*
 ** These savers are directly ported, so they should act identical to FT2

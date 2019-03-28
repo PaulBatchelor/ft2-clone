@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "ft2_unicode.h"
+#include "unicode.h"
 
 enum
 {
