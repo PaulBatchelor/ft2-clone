@@ -1,3 +1,4 @@
+USE_JACK=1
 
 OS = $(shell uname -s)
 
@@ -29,7 +30,10 @@ CFLAGS += -O3 -g
 LIBS += -lpthread -lm -lstdc++
 LIBS += -lSDL2
 
-#-o release/macos/ft2-osx.app/Contents/MacOS/ft2-osx -lSDL2
+ifdef USE_JACK
+CFLAGS += -DFT2_JACK
+LIBS += -ljack
+endif
 
 default: ft2
 

@@ -5,6 +5,11 @@
 
 #include <stdio.h>
 #include <stdint.h>
+
+#ifdef FT2_JACK
+#include <jack/jack.h>
+#endif
+
 #include "header.h"
 #include "config.h"
 #include "scopes.h"
@@ -27,6 +32,11 @@ static voice_t voice[MAX_VOICES * 2];
 static void (*sendAudSamplesFunc)(uint8_t *, int32_t, uint8_t); // "send mixed samples" routines
 
 extern const uint32_t panningTab[257]; // defined at the bottom of this file
+
+#ifdef FT2_JACK
+jack_port_t *out[2];
+jack_client_t *client = NULL;
+#endif
 
 uint32_t getVoiceRate(uint8_t i)
 {
@@ -51,6 +61,7 @@ void stopVoice(uint8_t i)
 
 bool setNewAudioSettings(void) // only call this from the main input/video thread
 {
+#ifndef FT2_JACK
 	uint32_t stringLen;
 
 	pauseAudio();
@@ -94,6 +105,7 @@ bool setNewAudioSettings(void) // only call this from the main input/video threa
 	}
 
 	resumeAudio();
+#endif
 	return (true);
 }
 
@@ -561,6 +573,127 @@ static void mixAudio(uint8_t *stream, int32_t sampleBlockLength, uint8_t numAudi
 	(sendAudSamplesFunc)(stream, sampleBlockLength, numAudioChannels);
 }
 
+#ifdef FT2_JACK
+static void jackMixAudio(jack_default_audio_sample_t **stream,
+                         int32_t sampleBlockLength,
+                         uint8_t numAudioChannels,
+                         int pos)
+{
+	int32_t i;
+	voice_t *v;
+	float fOut;
+	pattSyncData_t pattSyncData;
+	chSyncData_t chSyncData;
+	channel_t *c;
+	stmTyp *s;
+
+	assert(sampleBlockLength <= MAX_SAMPLES_PER_TICK);
+
+	memset(audio.mixBufferL, 0, sampleBlockLength * sizeof (int32_t));
+	memset(audio.mixBufferR, 0, sampleBlockLength * sizeof (int32_t));
+
+	// mix channels
+	for (i = 0; i < song.antChn; ++i)
+	{
+		// mix normal voice
+		v = &voice[i];
+
+		// call the mixing routine currently set for the voice
+		if (v->mixRoutine != NULL)
+		   (v->mixRoutine)((void *)(v), sampleBlockLength);
+
+		// mix fade-out voice
+		v = &voice[MAX_VOICES + i];
+
+		// call the mixing routine currently set for the voice
+		if (v->mixRoutine != NULL)
+		   (v->mixRoutine)((void *)(v), sampleBlockLength);
+	}
+
+	// normalize mix buffer and send to audio stream
+	/* (sendAudSamplesFunc)(stream, sampleBlockLength, numAudioChannels); */
+
+	for (i = 0; i < sampleBlockLength; ++i)
+	{
+        /* if (pmpLeft == 0) */
+        /* { */
+        /*     // replayer tick */
+
+        /*     replayerBusy = true; */
+
+        /*     if (audio.volumeRampingFlag) */
+        /*         mix_SaveIPVolumes(); */
+
+        /*     mainPlayer(); */
+        /*     mix_UpdateChannelVolPanFrq(); */
+
+        /*     // AUDIO/VIDEO SYNC */
+
+        /*     if (songPlaying) */
+        /*     { */
+        /*         // push pattern variables to sync queue */
+        /*         pattSyncData.timer      = song.curReplayerTimer; */
+        /*         pattSyncData.patternPos = song.curReplayerPattPos; */
+        /*         pattSyncData.pattern    = song.curReplayerPattNr; */
+        /*         pattSyncData.songPos    = song.curReplayerSongPos; */
+        /*         pattSyncData.speed      = song.speed; */
+        /*         pattSyncData.tempo      = song.tempo; */
+        /*         pattSyncData.globalVol  = song.globVol; */
+        /*         pattSyncData.timestamp  = audio.tickTime64; */
+        /*         pattQueuePush(pattSyncData); */
+        /*     } */
+
+        /*     // push channel variables to sync queue */
+        /*     for (i = 0; i < song.antChn; ++i) */
+        /*     { */
+        /*         c = &chSyncData.channels[i]; */
+        /*         s = &stm[i]; */
+
+        /*         c->rate             = voice[i].SFrq; */
+        /*         c->finalPeriod      = s->finalPeriod; */
+        /*         c->fineTune         = s->fineTune; */
+        /*         c->instrNr          = s->instrNr; */
+        /*         c->sampleNr         = s->sampleNr; */
+        /*         c->envSustainActive = s->envSustainActive; */
+        /*         c->mute             = s->stOff | s->mute; */
+        /*         c->status           = s->tmpStatus; */
+        /*         c->finalVol         = s->finalVol; */
+        /*         c->smpStartPos      = s->smpStartPos; */
+        /*         c->smpPtr           = s->smpPtr; */
+        /*         c->effTyp           = s->effTyp; */
+        /*         c->eff              = s->eff; */
+        /*         c->relTonNr         = s->relTonNr; */
+        /*     } */
+
+        /*     chSyncData.timestamp = audio.tickTime64; */
+        /*     chQueuePush(chSyncData); */
+
+        /*     audio.tickTime64 += tickTimeLen; */
+
+        /*     pmpLeft = speedVal; */
+        /*     replayerBusy = false; */
+        /* } */
+
+        /* pmpLeft--; */
+		// left channel
+		fOut = audio.mixBufferL[i] * fAudioAmpMul;
+        /* fOut = (float)rand() / RAND_MAX; */
+        /* fOut = (fOut * 2) - 1; */
+		fOut = CLAMP(fOut, -1.0f, 1.0f);
+		//*fStreamPointer24++ = fOut;
+        stream[0][i + pos] = fOut;
+
+		// right channel
+		fOut = audio.mixBufferR[i] * fAudioAmpMul;
+        /* fOut = (float)rand() / RAND_MAX; */
+        /* fOut = (fOut * 2) - 1; */
+		fOut = CLAMP(fOut, -1.0f, 1.0f);
+		//*fStreamPointer24++ = fOut;
+        stream[1][i + pos] = fOut;
+	}
+}
+#endif
+
 // used for song-to-WAV renderer
 uint32_t mixReplayerTickToBuffer(uint8_t *stream, uint8_t bitDepth)
 {
@@ -790,6 +923,7 @@ void pauseAudio(void) // lock audio + clear voices/scopes + render silence (for 
 
 void resumeAudio(void) // unlock audio
 {
+#ifndef FT2_JACK
 	if (audioPaused)
 	{
 		if (audio.dev > 0)
@@ -797,8 +931,111 @@ void resumeAudio(void) // unlock audio
 
 		audioPaused = false;
 	}
+#else
+    /* TODO: JACK resumeAudio */
+#endif
 }
+#ifdef FT2_JACK
+static int jack_process(jack_nframes_t nframes, void *arg)
+{
+    jack_default_audio_sample_t *audio_out[2];
+	int32_t a, b, i;
+	pattSyncData_t pattSyncData;
+	chSyncData_t chSyncData;
+	channel_t *c;
+	stmTyp *s;
+    int len;
+    int pos;
 
+	assert(pmpCountDiv > 0);
+    audio_out[0] = (jack_default_audio_sample_t*)jack_port_get_buffer(out[0], nframes);
+    audio_out[1] = (jack_default_audio_sample_t*)jack_port_get_buffer(out[1], nframes);
+
+    len = nframes;
+	a = len / pmpCountDiv;
+
+    audio.tickTime64 = SDL_GetPerformanceCounter();
+    /* fprintf(stderr, "len: %d, a: %d, pmpCountDiv: %d pmpChannels: %d\n", */
+    /*         len, a, pmpCountDiv, pmpChannels); */
+	/* if (a <= 0) */
+	/* 	return 0; */
+
+
+    pos = 0;
+    a = nframes;
+    while(a > 0) {
+        if (pmpLeft == 0)
+        {
+            // replayer tick
+
+            replayerBusy = true;
+
+            if (audio.volumeRampingFlag)
+                mix_SaveIPVolumes();
+
+            mainPlayer();
+            mix_UpdateChannelVolPanFrq();
+
+            // AUDIO/VIDEO SYNC
+
+            if (songPlaying)
+            {
+                // push pattern variables to sync queue
+                pattSyncData.timer      = song.curReplayerTimer;
+                pattSyncData.patternPos = song.curReplayerPattPos;
+                pattSyncData.pattern    = song.curReplayerPattNr;
+                pattSyncData.songPos    = song.curReplayerSongPos;
+                pattSyncData.speed      = song.speed;
+                pattSyncData.tempo      = song.tempo;
+                pattSyncData.globalVol  = song.globVol;
+                pattSyncData.timestamp  = audio.tickTime64;
+                pattQueuePush(pattSyncData);
+            }
+
+            // push channel variables to sync queue
+            for (i = 0; i < song.antChn; ++i)
+            {
+                c = &chSyncData.channels[i];
+                s = &stm[i];
+
+                c->rate             = voice[i].SFrq;
+                c->finalPeriod      = s->finalPeriod;
+                c->fineTune         = s->fineTune;
+                c->instrNr          = s->instrNr;
+                c->sampleNr         = s->sampleNr;
+                c->envSustainActive = s->envSustainActive;
+                c->mute             = s->stOff | s->mute;
+                c->status           = s->tmpStatus;
+                c->finalVol         = s->finalVol;
+                c->smpStartPos      = s->smpStartPos;
+                c->smpPtr           = s->smpPtr;
+                c->effTyp           = s->effTyp;
+                c->eff              = s->eff;
+                c->relTonNr         = s->relTonNr;
+            }
+
+            chSyncData.timestamp = audio.tickTime64;
+            chQueuePush(chSyncData);
+
+            audio.tickTime64 += tickTimeLen;
+
+            pmpLeft = speedVal;
+            replayerBusy = false;
+        }
+
+		b = a;
+		if (b > pmpLeft)
+			b = pmpLeft;
+
+        jackMixAudio(audio_out, b, pmpChannels, pos);
+        pos += b;
+
+		a -= b;
+		pmpLeft -= b;
+    }
+    return 0;
+}
+#endif
 static void SDLCALL mixCallback(void *userdata, Uint8 *stream, int len)
 {
 	int32_t a, b, i;
@@ -961,6 +1198,7 @@ void updateSendAudSamplesRoutine(bool lockMixer)
 
 bool setupAudio(bool showErrorMsg)
 {
+#ifndef FT2_JACK
 	int8_t newBitDepth;
 	uint8_t i;
 	uint16_t configAudioBufSize;
@@ -1102,16 +1340,124 @@ bool setupAudio(bool showErrorMsg)
 
 	updateSendAudSamplesRoutine(false);
 	return (true);
+#else
+    const char **ports;
+    const char *client_name;
+    const char *server_name;
+	int8_t newBitDepth;
+    jack_options_t options;
+    jack_status_t status;
+    int i;
+
+    if(client != NULL) {
+        fprintf(stderr, "JACK audio server seems to be started already\n");
+        return (false);
+    }
+
+    options = JackNullOption;
+
+    server_name=NULL;
+    client_name="ft2"; /* set the client name */
+
+    client = jack_client_open(client_name, options, &status, server_name);
+
+    if(client == NULL) {
+        fprintf(stderr, "JACK has failed you.\n");
+        if (status & JackServerFailed) {
+            fprintf (stderr, "It was unable to connect to the JACK server\n");
+        }
+        return (false);
+    }
+
+    config.audioFreq = jack_get_sample_rate(client);
+    audio.freq = config.audioFreq;
+    newBitDepth = 24;
+    config.specialFlags &= ~BITDEPTH_16;
+    config.specialFlags |=  BITDEPTH_24;
+    song.speed = 125;
+	setSpeed(song.speed);
+	pmpChannels = 2;
+	pmpCountDiv = pmpChannels * ((newBitDepth == 16) ? sizeof (int16_t) : sizeof (float));
+	audio.lastWorkingAudioFreq = config.audioFreq;
+	audio.lastWorkingAudioBits = config.specialFlags & (BITDEPTH_16   + BITDEPTH_24   + BUFFSIZE_512 +
+														BUFFSIZE_1024 + BUFFSIZE_2048 + BUFFSIZE_4096);
+    if (status & JackServerStarted) {
+        fprintf(stderr, "JACK server started\n");
+    }
+
+    if (status & JackNameNotUnique) {
+        client_name = jack_get_client_name(client);
+        fprintf(stderr, "unique name `%s' assigned\n", client_name);
+    }
+
+    jack_set_process_callback (client, jack_process, NULL);
+
+    out[0] = jack_port_register(client, "output1",
+                                JACK_DEFAULT_AUDIO_TYPE,
+                                JackPortIsOutput, 0);
+    out[1] = jack_port_register (client, "output2",
+                                    JACK_DEFAULT_AUDIO_TYPE,
+                                    JackPortIsOutput, 0);
+
+    if((out[0] == NULL) || (out[1] == NULL)) {
+        fprintf(stderr, "no more JACK ports available\n");
+        return (false);
+    }
+
+    if(jack_activate(client)) {
+        fprintf(stderr, "cannot activate client\n");
+        return (false);
+    }
+
+    ports = jack_get_ports (client, NULL, NULL,
+                            JackPortIsPhysical|JackPortIsInput);
+
+    if (ports == NULL) {
+        fprintf(stderr, "no physical playback ports\n");
+        return (false);
+    }
+
+    if (jack_connect(client, jack_port_name(out[0]), ports[0])) {
+        fprintf (stderr, "cannot connect output ports\n");
+    }
+
+    if (jack_connect(client, jack_port_name(out[1]), ports[1])) {
+        fprintf (stderr, "cannot connect output ports\n");
+    }
+
+    jack_free (ports);
+
+
+	for (i = 0; i < MAX_VOICES; ++i)
+		stopVoice(i);
+
+	stopAllScopes();
+
+	pmpLeft = 0; // reset sample counter
+
+	calcReplayRate(audio.freq);
+
+	updateSendAudSamplesRoutine(false);
+    return (true);
+#endif
 }
 
 void closeAudio(void)
 {
+#ifndef FT2_JACK
 	if (audio.dev > 0)
 	{
 		SDL_PauseAudioDevice(audio.dev, true);
 		SDL_CloseAudioDevice(audio.dev);
 		audio.dev = 0;
 	}
+#else
+    /* TODO: implement JACK close audio */
+    if(client != NULL) {
+        jack_client_close (client);
+        client = NULL;
+    }
+#endif
 }
 
 /*

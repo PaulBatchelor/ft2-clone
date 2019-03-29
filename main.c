@@ -102,12 +102,19 @@ int main(int argc, char *argv[])
 	disableWasapi(); // disable problematic WASAPI SDL2 audio driver on Windows (causes clicks/pops sometimes...)
 #endif
 
+#ifndef FT2_JACK
 	if (SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO) != 0)
 	{
 		showErrorMsgBox("Couldn't initialize SDL:\n%s", SDL_GetError());
 		return (1);
 	}
-
+#else
+	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+	{
+		showErrorMsgBox("Couldn't initialize SDL:\n%s", SDL_GetError());
+		return (1);
+	}
+#endif
 	/* Text input is started by default in SDL2, turn it off to remove ~2ms spikes per key press.
 	** We manuallay start it again when someone clicks on a text edit box, and stop it when done.
 	** Ref.: https://bugzilla.libsdl.org/show_bug.cgi?id=4166 */
@@ -153,7 +160,7 @@ int main(int argc, char *argv[])
 #ifdef __APPLE__
 		config.audioFreq = 44100;
 #else
-		config.audioFreq = 48000;
+		config.audioFreq = 44100;
 #endif
 		// try 16-bit audio at 1024 samples (44.1kHz/48kHz)
 		config.specialFlags &= ~(BITDEPTH_24 + BUFFSIZE_512 + BUFFSIZE_2048 + BUFFSIZE_4096);
