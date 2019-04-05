@@ -22,7 +22,14 @@ endif
 
 ifeq ($(OS), Linux)
 # Alpine linux has FTS as an external lib
+OS_NAME=$(shell \
+if [ -f /etc/os-release ];\
+then \
+cat /etc/os-release | egrep -e ^ID= | cut -d= -f2; \
+fi)
+ifeq ($(OS_NAME), alpine)
 LIBS += -lfts
+endif
 endif
 
 #CFLAGS += -Wno-deprecated -Wextra -Wunused
