@@ -104,8 +104,8 @@ void keyDownHandler(SDL_Scancode scancode, SDL_Keycode keycode, bool keyWasRepea
 
 	if (editor.ui.sysReqShown)
 	{
-		if (keycode == SDLK_ESCAPE)
-			editor.ui.sysReqShown = false;
+		/* if (keycode == SDLK_ESCAPE) */
+		/* 	editor.ui.sysReqShown = false; */
 
 		return;
 	}
@@ -136,8 +136,19 @@ void keyDownHandler(SDL_Scancode scancode, SDL_Keycode keycode, bool keyWasRepea
 
 	if (keycode == SDLK_ESCAPE)
 	{
-		if (quitBox(false) == 1)
-			editor.throwExit = true;
+		/* if (quitBox(false) == 1) */
+		/* 	editor.throwExit = true; */
+        if (playMode == PLAYMODE_IDLE)
+        {
+            lockMixerCallback();
+            memset(editor.keyOnTab, 0, sizeof (editor.keyOnTab));
+            playMode = PLAYMODE_EDIT;
+            editor.ui.updatePosSections = true; // for updating mode text
+            unlockMixerCallback();
+        } else if (playMode == PLAYMODE_EDIT) {
+            playMode = PLAYMODE_IDLE;
+            editor.ui.updatePosSections = true; // for updating mode text
+        }
 
 		return;
 	}
@@ -374,11 +385,13 @@ static void handleKeys(SDL_Keycode keycode, SDL_Scancode scanKey)
 		{
 			if (playMode == PLAYMODE_IDLE)
 			{
-				lockMixerCallback();
-				memset(editor.keyOnTab, 0, sizeof (editor.keyOnTab));
-				playMode = PLAYMODE_EDIT;
-				editor.ui.updatePosSections = true; // for updating mode text
-				unlockMixerCallback();
+				/* lockMixerCallback(); */
+				/* memset(editor.keyOnTab, 0, sizeof (editor.keyOnTab)); */
+				/* playMode = PLAYMODE_EDIT; */
+				/* editor.ui.updatePosSections = true; // for updating mode text */
+				/* unlockMixerCallback(); */
+
+                startPlaying(PLAYMODE_SONG, 0);
 			}
 			else
 			{
