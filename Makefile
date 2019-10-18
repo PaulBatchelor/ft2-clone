@@ -107,3 +107,6 @@ ft2: $(OBJ)
 clean:
 	$(RM) $(OBJ)
 	$(RM) ft2
+
+install: ft2
+	cp ft2 /usr/local/bin
