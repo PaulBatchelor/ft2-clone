@@ -981,8 +981,6 @@ static bool checkModifiedKeys(SDL_Keycode keycode)
 				return (true);
 			}
 			if (keyb.leftCtrlPressed)
-
-
 			{
                 if (quitBox(false) == 1)
                     editor.throwExit = true;
