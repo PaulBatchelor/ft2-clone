@@ -780,6 +780,10 @@ void loadConfigOrSetDefaults(void)
 {
 	size_t fileSize;
 	FILE *in;
+    char cwd[256];
+
+    /* paul: store CWD before going to config */
+    getcwd(cwd, 256);
 
 	setConfigFileLocation();
 
@@ -832,6 +836,8 @@ void loadConfigOrSetDefaults(void)
 		return;
 	}
 
+    /* Paul: flip back to CWD */
+    chdir(cwd);
 	loadConfigFromBuffer(false);
 }
 

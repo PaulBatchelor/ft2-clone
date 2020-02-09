@@ -153,7 +153,8 @@ static void setupInitialPaths(void)
 
 	// set initial path to home on *NIX systems before trying the custom path
 #ifndef _WIN32
-	UNICHAR_CHDIR(getenv("HOME"));
+    /* Paul: don' do this */
+	/* UNICHAR_CHDIR(getenv("HOME")); */
 #endif
 
 	if (UNICHAR_CHDIR(FReq_ModCurPathU) != 0) UNICHAR_GETCWD(FReq_ModCurPathU, PATH_MAX);
