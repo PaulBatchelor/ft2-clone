@@ -611,12 +611,15 @@ bool handleEditKeys(SDL_Keycode keycode, SDL_Scancode scancode)
 		return (true);
 	}
 
-	// a hack for french keyb. layouts to allow writing numbers in the pattern data with left SHIFT
-	frKeybHack = keyb.leftShiftPressed && !keyb.leftAltPressed && !keyb.leftCtrlPressed &&
-					(scancode >= SDL_SCANCODE_1) && (scancode <= SDL_SCANCODE_0);
+	/* // a hack for french keyb. layouts to allow writing numbers in the pattern data with left SHIFT */
+	/* frKeybHack = keyb.leftShiftPressed && !keyb.leftAltPressed && !keyb.leftCtrlPressed && */
+	/* 				(scancode >= SDL_SCANCODE_1) && (scancode <= SDL_SCANCODE_0); */
+
+    frKeybHack = 0;
 
 	if (frKeybHack || !keyb.keyModifierDown)
 		return (testEditKeys(scancode, keycode));
+
 
 	return (false);
 }

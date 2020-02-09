@@ -1191,6 +1191,24 @@ static bool checkModifiedKeys(SDL_Keycode keycode)
 				checkRadioButton(RB_CONFIG_IO_DEVICES);
 
 				return (true);
+			} else if (keyb.leftShiftPressed) {
+				/* paul: note off mapped to '!' */
+                /* code taken from CAPSLOCK mapping for note off */
+				uint16_t pattLen;
+				if ((playMode == PLAYMODE_EDIT) || (playMode == PLAYMODE_RECPATT) || (playMode == PLAYMODE_RECSONG))
+				{
+					if (!allocatePattern(editor.editPattern))
+						break;
+
+					patt[editor.editPattern][(editor.pattPos * MAX_VOICES) + editor.cursor.ch].ton = 97;
+
+					pattLen = pattLens[editor.editPattern];
+					if ((playMode == PLAYMODE_EDIT) && (pattLen >= 1))
+						setPos(-1, (editor.pattPos + editor.ID_Add) % pattLen);
+
+					editor.ui.updatePatternEditor = true;
+					setSongModifiedFlag();
+				}
 			}
 		}
 		break;
