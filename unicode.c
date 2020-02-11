@@ -250,6 +250,8 @@ char *unicharToCp437(UNICHAR *src, bool removeIllegalChars)
 #else
 
 // non-Windows routines
+
+/* Paul: ignore conversion. make this just a strcpy. */
 char *cp437ToUtf8(char *src)
 {
 	char *inPtr, *outPtr, *outBuf;
@@ -264,9 +266,9 @@ char *cp437ToUtf8(char *src)
 	if (srcLen <= 0)
 		return (NULL);
 
-	cd = iconv_open("UTF-8", "437");
-	if (cd == (iconv_t)(-1))
-		return (NULL);
+	/* cd = iconv_open("UTF-8", "437"); */
+	/* if (cd == (iconv_t)(-1)) */
+	/* 	return (NULL); */
 
 	outLen = srcLen * 2; // should be sufficient
 
@@ -278,15 +280,17 @@ char *cp437ToUtf8(char *src)
 	inLen  = srcLen;
 	outPtr = outBuf;
 
-	rc = iconv(cd, &inPtr, &inLen, &outPtr, &outLen);
-	iconv(cd, NULL, NULL, &outPtr, &outLen); // flush
-	iconv_close(cd);
+    strncpy(outPtr, inPtr, srcLen);
 
-	if (rc == -1)
-	{
-		free(outBuf);
-		return (NULL);
-	}
+	/* rc = iconv(cd, &inPtr, &inLen, &outPtr, &outLen); */
+	/* iconv(cd, NULL, NULL, &outPtr, &outLen); // flush */
+	/* iconv_close(cd); */
+
+	/* if (rc == -1) */
+	/* { */
+	/* 	free(outBuf); */
+	/* 	return (NULL); */
+	/* } */
 
 	return (outBuf);
 }
